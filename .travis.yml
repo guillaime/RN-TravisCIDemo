@@ -47,7 +47,6 @@ jobs:
         - chmod +x ./android/gradlew
         - openssl aes-256-cbc -K $encrypted_fae40d17ff9d_key -iv $encrypted_fae40d17ff9d_iv -in ./android/app/tcd.keystore.enc -out ./android/app/tcd.keystore -d
         - cp ./android/app/tcd.keystore ./android/
-        - cp ./android/app/tcd.keystore ./android/app/app/
         - gem install fastlane --no-rdoc --no-ri --no-document --quiet
         - touch $HOME/.android/repositories.cfg
         - yes | sdkmanager "platforms;android-28"
