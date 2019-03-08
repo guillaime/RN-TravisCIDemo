@@ -45,7 +45,8 @@ jobs:
         - travis_retry sudo apt-get update -qq
         - travis_retry sudo apt-get install -y -qq yarn
         - chmod +x ./android/gradlew
-        - openssl aes-256-cbc -K $encrypted_0ab82af4d5d5_key -iv $encrypted_0ab82af4d5d5_iv -in ./android/app/travis-ci-demo.keystore.enc -out ./android/app/travis-ci-demo.keystore -d
+        - openssl aes-256-cbc -K $encrypted_0ab82af4d5d5_key -iv $encrypted_0ab82af4d5d5_iv -in ./android/app/tcd.keystore.enc -out ./android/app/tcd.keystore -d
+        - cp ./android/app/tcd.keystore ./android/
         - gem install fastlane --no-rdoc --no-ri --no-document --quiet
         - touch $HOME/.android/repositories.cfg
         - yes | sdkmanager "platforms;android-28"

@@ -1,38 +1,34 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
+desc "Submit a new Beta Build to Crashlytics Beta"
 
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+lane :beta do |values|
 
-default_platform(:android)
+    # Adjust the `build_type` and `flavor` params as needed to build the right APK for your setup
 
-platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
+    emails = values[:test_email] ? values[:test_email] : ['guillaimejanssen@msn.com'] # You can list more emails here
+    groups = values[:test_email] ? nil : nil # You can define groups on the web and reference them here
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
+    gradle(task: "clean")
+    gradle(
+      task: "assembleRelease",
+      #project_dir: "android/",
+      properties: {
+        'android.useDeprecatedNdk' => true,
+        'android.injected.signing.store.file' => 'tcd.keystore',
+        'android.injected.signing.store.password' => 'tcd-alias',
+        'android.injected.signing.key.alias'=> 'tcd-alias',
+        'android.injected.signing.key.password' => 'tcd-alias'
+      }
+    )
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
-  end
+    supply(track: 'internal')
+ 
+    crashlytics(
+      api_token: '03219a875bcdc17c29e6a850f5d6e102ec3ece50',
+      build_secret: 'ead4e396916ee1c3efae37e815829fbd56b8ba4a1da3963cfa830662beeabe68',
+      emails: emails,
+      groups: groups,
+      debug: true,
+      notes: 'Distributed with fastlane', # Check out the changelog_from_git_commits action
+      notifications: true  # Should this distribution notify your testers via email?
+    )
 end
