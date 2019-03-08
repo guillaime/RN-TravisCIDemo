@@ -48,7 +48,7 @@ jobs:
         - openssl aes-256-cbc -K $encrypted_fae40d17ff9d_key -iv $encrypted_fae40d17ff9d_iv -in ./android/keystores/tcd.keystore.enc -out ./android/keystores/tcd.keystore -d
         - gem update
         - gem install fastlane --no-rdoc --no-ri --no-document --quiet
-        - gem install bundler
+        - gem install bundle
         - bundle update
         - touch $HOME/.android/repositories.cfg
         - yes | sdkmanager "platforms;android-28"
