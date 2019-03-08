@@ -46,7 +46,6 @@ jobs:
         - travis_retry sudo apt-get install -y -qq yarn
         - chmod +x ./android/gradlew
         - openssl aes-256-cbc -K $encrypted_fae40d17ff9d_key -iv $encrypted_fae40d17ff9d_iv -in ./android/app/tcd.keystore.enc -out ./android/app/tcd.keystore -d
-        - cp ./android/app/tcd.keystore ./android/
         - gem install fastlane --no-rdoc --no-ri --no-document --quiet
         - touch $HOME/.android/repositories.cfg
         - yes | sdkmanager "platforms;android-28"
@@ -57,7 +56,7 @@ jobs:
         - cd android && ./gradlew clean
         - fastlane beta
       after_script:
-        - ./gradlew assembleRelease crashlyticsUploadDistributionRelease -Pandroid.injected.signing.store.file=./app/$TCD_RELEASE_STORE_FILE -Pandroid.injected.signing.store.password=$TCD_RELEASE_STORE_PASSWORD -Pandroid.injected.signing.key.alias=$TCD_RELEASE_KEY_ALIAS -Pandroid.injected.signing.key.password=$TCD_RELEASE_KEY_PASSWORD
+        - ./gradlew assembleRelease crashlyticsUploadDistributionRelease -Pandroid.injected.signing.store.file=app/$TCD_RELEASE_STORE_FILE -Pandroid.injected.signing.store.password=$TCD_RELEASE_STORE_PASSWORD -Pandroid.injected.signing.key.alias=$TCD_RELEASE_KEY_ALIAS -Pandroid.injected.signing.key.password=$TCD_RELEASE_KEY_PASSWORD
       branches:
         only:
           - master
