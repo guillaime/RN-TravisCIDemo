@@ -49,7 +49,6 @@ jobs:
         - gem update
         - gem install fastlane --no-rdoc --no-ri --no-document --quiet
         - gem install bundle
-        - bundle update
         - touch $HOME/.android/repositories.cfg
         - yes | sdkmanager "platforms;android-28"
         - yes | sdkmanager "build-tools;28.0.3"
