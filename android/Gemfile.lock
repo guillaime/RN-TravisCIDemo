@@ -155,7 +155,6 @@ PLATFORMS
 
 DEPENDENCIES
   fastlane
-  fastlane-plugin-versioning_android
 
 BUNDLED WITH
    2.0.1
