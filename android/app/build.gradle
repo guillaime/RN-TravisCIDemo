@@ -128,7 +128,7 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("~/home/travis/build/guillaime/RN-TravisCIDemo/android/keystores/tcd.keystore")
+            storeFile file(TCD_RELEASE_STORE_FILE)
             storePassword = TCD_RELEASE_STORE_PASSWORD
             keyAlias = TCD_RELEASE_KEY_ALIAS
             keyPassword = TCD_RELEASE_KEY_PASSWORD

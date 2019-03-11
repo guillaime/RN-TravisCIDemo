@@ -58,7 +58,7 @@ jobs:
         - cd android && ./gradlew clean
         - fastlane beta
       after_script:
-        - ./gradlew assembleRelease crashlyticsUploadDistributionRelease -Pandroid.injected.signing.store.file=keystores/$TCD_RELEASE_STORE_FILE -Pandroid.injected.signing.store.password=$TCD_RELEASE_STORE_PASSWORD -Pandroid.injected.signing.key.alias=$TCD_RELEASE_KEY_ALIAS -Pandroid.injected.signing.key.password=$TCD_RELEASE_KEY_PASSWORD
+        - ./gradlew assembleRelease crashlyticsUploadDistributionRelease -Pandroid.injected.signing.store.file=../keystores/$TCD_RELEASE_STORE_FILE -Pandroid.injected.signing.store.password=$TCD_RELEASE_STORE_PASSWORD -Pandroid.injected.signing.key.alias=$TCD_RELEASE_KEY_ALIAS -Pandroid.injected.signing.key.password=$TCD_RELEASE_KEY_PASSWORD
       branches:
         only:
           - master
