@@ -53,6 +53,7 @@ jobs:
 
         # Get Fastlane
         - gem install fastlane --no-rdoc --no-ri --no-document --quiet
+        - gem install bundler -v 2.0.1
         # - gem install bundler:2.0.1
 
         # Others
