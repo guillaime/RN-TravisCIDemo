@@ -577,7 +577,6 @@
 				905BC91E02408DF5287EE76B /* Pods-TravisCIDemoTests.debug.xcconfig */,
 				5E8201F0349FF4956B1155FD /* Pods-TravisCIDemoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1421,7 +1420,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.guillaime.traviscidemo;
 				PRODUCT_NAME = TravisCIDemo;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1444,7 +1443,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.guillaime.traviscidemo;
 				PRODUCT_NAME = TravisCIDemo;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

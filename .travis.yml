@@ -49,7 +49,6 @@ jobs:
         - gem update --system
         - gem install fastlane --no-rdoc --no-ri --no-document --quiet
         - gem install bundle
-        - bundle update
         - touch $HOME/.android/repositories.cfg
         - yes | sdkmanager "platforms;android-28"
         - yes | sdkmanager "build-tools;28.0.3"
@@ -60,6 +59,34 @@ jobs:
         - fastlane beta
       after_script:
         - ./gradlew assembleRelease crashlyticsUploadDistributionRelease -Pandroid.injected.signing.store.file=keystores/$TCD_RELEASE_STORE_FILE -Pandroid.injected.signing.store.password=$TCD_RELEASE_STORE_PASSWORD -Pandroid.injected.signing.key.alias=$TCD_RELEASE_KEY_ALIAS -Pandroid.injected.signing.key.password=$TCD_RELEASE_KEY_PASSWORD
+      branches:
+        only:
+          - master
+      notifications:
+        email:
+          on_success: never
+          on_failure: always
+
+    - stage: iOS Deploy
+      if: branch = master AND type = push
+      language: objective-c
+      os: osx
+      osx_image: xcode9
+      sudo: required
+      before_install:
+        - nvm install 7
+        - node --version
+        - travis_retry npm install -g yarn
+        - yarn -version
+        - gem install fastlane --no-rdoc --no-ri --no--document --quiet
+        - openssl aes-256-cbc -K $encrypted_3d64b6afee74_key -iv $encrypted_3d64b6afee74_iv -in .deploy_key.pub.enc -out .deploy_key.pub -d
+        - ssh-keyscan github.com >> ~/.ssh/known_hosts
+        - chmod 600 ~/.ssh/deploy_key.pub
+      install:
+        - travis_retry yarn
+      script:
+        - cd ios
+        - fastlane beta --capture_output
       branches:
         only:
           - master
