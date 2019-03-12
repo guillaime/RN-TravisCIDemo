@@ -23,7 +23,7 @@ class App extends Component {
     ratings.shift();
 
     return ratings;
-  }
+  };
 
   state = {
     data: this.generateArray()

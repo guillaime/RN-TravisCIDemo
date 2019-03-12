@@ -39,7 +39,8 @@ jobs:
           - google-gdk-license-.+
       before_install:
         - nvm install 8.5.0
-        - rvm install 2.0.0
+        - PATH="/bin:$PATH" rvm use 2.3.0 --install --binary --fuzzy
+        - rvm install 2.3.0
         - node --version
         - travis_retry curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
         - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
