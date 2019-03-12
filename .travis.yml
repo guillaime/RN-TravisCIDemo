@@ -3,7 +3,7 @@ jobs:
 
     - stage: Unittest and lint
       language: node_js
-      node_js: 8.5.0
+      node_js: 8.12.0
       install: yarn
       script: npm run test:lint && npm run test:unit
 
@@ -72,30 +72,30 @@ jobs:
           on_success: never
           on_failure: always
 
-    - stage: iOS Deploy
-      if: branch = master AND type = push
-      language: objective-c
-      os: osx
-      osx_image: xcode9
-      sudo: required
-      before_install:
-        - nvm install 7
-        - node --version
-        - travis_retry npm install -g yarn
-        - yarn -version
-        - gem install fastlane --no-rdoc --no-ri --quiet
-        - openssl aes-256-cbc -K $encrypted_3d64b6afee74_key -iv $encrypted_3d64b6afee74_iv -in .deploy_key.pub.enc -out .deploy_key.pub -d
-        - ssh-keyscan github.com >> ~/.ssh/known_hosts
-        - chmod 600 ~/.ssh/deploy_key.pub
-      install:
-        - travis_retry yarn
-      script:
-        - cd ios
-        - fastlane beta --capture_output
-      branches:
-        only:
-          - master
-      notifications:
-        email:
-          on_success: never
-          on_failure: always
+#    - stage: iOS Deploy
+#      if: branch = master AND type = push
+#      language: objective-c
+#      os: osx
+#      osx_image: xcode9
+#      sudo: required
+#      before_install:
+#        - nvm install 7
+#        - node --version
+#        - travis_retry npm install -g yarn
+#        - yarn -version
+#        - gem install fastlane --no-rdoc --no-ri --quiet
+#        - openssl aes-256-cbc -K $encrypted_3d64b6afee74_key -iv $encrypted_3d64b6afee74_iv -in .deploy_key.pub.enc -out .deploy_key.pub -d
+#        - ssh-keyscan github.com >> ~/.ssh/known_hosts
+#        - chmod 600 ~/.ssh/deploy_key.pub
+#      install:
+#        - travis_retry yarn
+#      script:
+#        - cd ios
+#        - fastlane beta --capture_output
+#      branches:
+#        only:
+#          - master
+#      notifications:
+#        email:
+#          on_success: never
+#          on_failure: always

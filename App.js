@@ -16,20 +16,10 @@ import {
 } from 'react-native';
 
 class App extends Component {
+  generateArray = () => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
   state = {
     data: this.generateArray()
-  };
-
-  generateArray = () => {
-    const ratings = [11];
-    while (ratings.length !== 11) {
-      const value = Math.floor(Math.random() * 10) + 1;
-      if (value === ratings[ratings.length - 1] - 1) {
-        ratings.push(value);
-      }
-    }
-    ratings.shift();
-    return ratings;
   };
 
   render() {
