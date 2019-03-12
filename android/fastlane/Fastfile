@@ -14,8 +14,8 @@ lane :beta do |values|
       properties: {
         'android.useDeprecatedNdk' => true,
         'android.injected.signing.store.file' => '/home/travis/build/guillaime/RN-TravisCIDemo/android/keystores/keystore.keystore',
-        'android.injected.signing.store.password' => password,
-        'android.injected.signing.key.alias'=> traviscidemo,
+        'android.injected.signing.store.password' => 'password',
+        'android.injected.signing.key.alias'=> 'traviscidemo',
         'android.injected.signing.key.password' => 'password'
         #'android.injected.signing.store.file' => 'keystores/keystore.keystore',
         #'android.injected.signing.store.password' => 'password',
