@@ -18,9 +18,9 @@ lane :beta do |values|
         'android.injected.signing.key.alias'=> '$TCD_RELEASE_KEY_ALIAS',
         'android.injected.signing.key.password' => '$TCD_RELEASE_KEY_PASSWORD'
         #'android.injected.signing.store.file' => 'keystores/keystore.keystore',
-        #'android.injected.signing.store.password' => 'store-password',
-        #'android.injected.signing.key.alias'=> 'key-alias',
-        #'android.injected.signing.key.password' => 'key-password'
+        #'android.injected.signing.store.password' => 'password',
+        #'android.injected.signing.key.alias'=> 'traviscidemo',
+        #'android.injected.signing.key.password' => 'password'
       }
     )
 
