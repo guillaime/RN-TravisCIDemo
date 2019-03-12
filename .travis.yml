@@ -52,6 +52,7 @@ jobs:
         - sudo apt-get update
         - sudo apt-get install curl
         - \curl -sSL https://get.rvm.io | bash -s stable --ruby
+        - rvm reload
         - rvm install ruby-2.4.2
 
         # Get Fastlane
