@@ -38,7 +38,7 @@ jobs:
           - android-sdk-license-.+
           - google-gdk-license-.+
       before_install:
-        - nvm install 8.5.0
+        - nvm install ^8.10.0
         - PATH="/bin:$PATH" rvm use 2.3.0 --install --binary --fuzzy
         - rvm install 2.3.0
         - node --version

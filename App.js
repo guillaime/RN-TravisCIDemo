@@ -7,32 +7,39 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, FlatList } from 'react-native';
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList
+} from 'react-native';
 
 class App extends Component {
-
-  generateArray = () => {
-    var ratings = [11];
-
-    while(ratings.length !== 11) {
-      var value = Math.floor(Math.random() * 10) + 1;
-      if(value === ratings[ratings.length -1] - 1)
-        ratings.push(value);
-    }
-    ratings.shift();
-
-    return ratings;
-  };
-
   state = {
     data: this.generateArray()
+  };
+
+  generateArray = () => {
+    const ratings = [11];
+    while (ratings.length !== 11) {
+      const value = Math.floor(Math.random() * 10) + 1;
+      if (value === ratings[ratings.length - 1] - 1) {
+        ratings.push(value);
+      }
+    }
+    ratings.shift();
+    return ratings;
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <FlatList renderItem={({item}) => <Text style={styles.instructions} >{item}</Text>} data={this.state.data} key={({item}) => item}/>
+        <FlatList
+          renderItem={({ item }) => <Text style={styles.instructions}>{item}</Text>}
+          data={this.state.data}
+          key={({ item }) => item}
+        />
       </View>
     );
   }
