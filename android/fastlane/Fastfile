@@ -1,7 +1,8 @@
-desc "Submit a new Beta Build to Crashlytics Beta"
+desc "Using Fastlane"
 
 lane :beta do |values|
 
+    desc "Pushing a new signed APK to Google Play Store, also adding Fabric Crashlytics"
     gradle(task: "clean")
     gradle(
       task: "assembleRelease",
@@ -16,7 +17,6 @@ lane :beta do |values|
     )
 
     upload_to_play_store(track: 'internal')
-
     crashlytics(
       api_token: '$CRASHLYTICS_API_KEY',
       build_secret: '$CRASHLYTICS_BUILD_SECRET',
@@ -26,6 +26,8 @@ lane :beta do |values|
 end
 
 lane :build do |values|
+
+    desc "Trying to sign an APK"
     gradle(task: "clean")
     gradle(
       task: "assembleRelease",

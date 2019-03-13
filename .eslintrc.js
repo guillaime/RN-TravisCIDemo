@@ -10,7 +10,8 @@ module.exports = {
         'react/prop-types': 'off',
         'comma-dangle': 'off',
         'react/destructuring-assignment': 'always',
-        'react/sort-comp': [0, { }]
+        'react/sort-comp': [0, { }],
+        "global-require": 0
     },
     'globals': {
         "fetch": false
