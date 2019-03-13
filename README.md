@@ -11,3 +11,6 @@ Currently implemented scripts:
 
 * UnitTests & ESLint
 * Deploy to Google Play Console
+
+Internal test app is available for download at the following link:
+https://play.google.com/apps/internaltest/4700972046828730911
