@@ -72,6 +72,67 @@ jobs:
           on_success: never
           on_failure: always
 
+    - stage: Android Test Build
+      if: branch = master AND type = pull_request
+      language: android
+      jdk: oraclejdk8
+      sudo: required
+      dist: precise
+      env:
+        global:
+          - ANDROID_API_LEVEL=28
+          - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+          - ANDROID_ABI=armeabi-v7a
+      before_cache:
+        - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        yarn: true
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
+          - node_modules
+      android:
+        components:
+          - tools
+          - platform-tools
+          - tools
+          - extra-google-m2repository
+        licenses:
+          - android-sdk-preview-license-.+
+          - android-sdk-license-.+
+          - google-gdk-license-.+
+      before_install:
+        - nvm install 8.10.0
+        - PATH="/bin:$PATH" rvm use 2.3.0 --install --binary --fuzzy
+        - rvm install 2.3.0
+        - node --version
+        - travis_retry curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        - travis_retry sudo apt-get update -qq
+        - travis_retry sudo apt-get install -y -qq yarn
+        - chmod +x ./android/gradlew
+        - openssl aes-256-cbc -K $encrypted_ec99c37eb3cf_key -iv $encrypted_ec99c37eb3cf_iv -in ./android/keystores/keystore.keystore.enc -out ./android/keystores/keystore.keystore -d
+
+        # Get Fastlane
+        - gem install fastlane -NV
+        - gem install bundler -v 2.0.1
+
+        # Others
+        - touch $HOME/.android/repositories.cfg
+        - yes | sdkmanager "platforms;android-28"
+        - yes | sdkmanager "build-tools;28.0.3"
+      install:
+        - yarn install
+      script:
+        - cd android && ./gradlew clean
+        - fastlane build
+      after_script:
+        - ./gradlew assembleRelease crashlyticsUploadDistributionRelease -Pandroid.injected.signing.store.file=/home/travis/build/guillaime/RN-TravisCIDemo/android/keystores/$TCD_RELEASE_STORE_FILE -Pandroid.injected.signing.store.password=$TCD_RELEASE_STORE_PASSWORD -Pandroid.injected.signing.key.alias=$TCD_RELEASE_KEY_ALIAS -Pandroid.injected.signing.key.password=$TCD_RELEASE_KEY_PASSWORD
+      branches:
+        only:
+          - master
+
 #    - stage: iOS Deploy
 #      if: branch = master AND type = push
 #      language: objective-c

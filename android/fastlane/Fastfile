@@ -2,21 +2,16 @@ desc "Submit a new Beta Build to Crashlytics Beta"
 
 lane :beta do |values|
 
-    # Adjust the `build_type` and `flavor` params as needed to build the right APK for your setup
-
-    emails = values[:test_email] ? values[:test_email] : ['guillaimejanssen@msn.com'] # You can list more emails here
-    groups = values[:test_email] ? nil : nil # You can define groups on the web and reference them here
-
     gradle(task: "clean")
     gradle(
       task: "assembleRelease",
       #project_dir: "android/",
       properties: {
         'android.useDeprecatedNdk' => true,
-        'android.injected.signing.store.file' => '/home/travis/build/guillaime/RN-TravisCIDemo/android/keystores/$TCD_RELEASE_STORE_FILE',
-        'android.injected.signing.store.password' => '$TCD_RELEASE_STORE_PASSWORD',
-        'android.injected.signing.key.alias'=> '$TCD_RELEASE_KEY_ALIAS',
-        'android.injected.signing.key.password' => '$TCD_RELEASE_KEY_PASSWORD'
+        'android.injected.signing.store.file' => '/home/travis/build/guillaime/RN-TravisCIDemo/android/keystores/keystore.keystore',
+        'android.injected.signing.store.password' => 'password',
+        'android.injected.signing.key.alias'=> 'traviscidemo',
+        'android.injected.signing.key.password' => 'password'
       }
     )
 
@@ -27,5 +22,20 @@ lane :beta do |values|
       build_secret: '$CRASHLYTICS_BUILD_SECRET',
       debug: true,
       notifications: true
+    )
+end
+
+lane :build do |values|
+    gradle(task: "clean")
+    gradle(
+      task: "assembleRelease",
+      #project_dir: "android/",
+      properties: {
+        'android.useDeprecatedNdk' => true,
+        'android.injected.signing.store.file' => '/home/travis/build/guillaime/RN-TravisCIDemo/android/keystores/keystore.keystore',
+        'android.injected.signing.store.password' => 'password',
+        'android.injected.signing.key.alias'=> 'traviscidemo',
+        'android.injected.signing.key.password' => 'password'
+      }
     )
 end
