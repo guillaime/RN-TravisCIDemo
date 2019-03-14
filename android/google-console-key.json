@@ -1,4 +1,5 @@
 {
+  #deprecated
   "type": "service_account",
   "project_id": "api-5088469494406858965-356850",
   "private_key_id": "b3900e088f4c8edd1dfcba04e01c64d8acfd746a",
